@@ -105,4 +105,13 @@ public class VendorController {
         return "redirect:/vendors/";
     }
 
+    @GetMapping("/{id}")
+    public String getVendor(@PathVariable Integer id, Model model) {
+        Vendor vendor = vendorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
+        model.addAttribute("vendor", vendor);
+
+        return "vendors/info";
+    }
+
 }
