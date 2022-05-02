@@ -17,7 +17,10 @@
 
 </head>
 <body>
-
+    <div class ="container my-5">
+        <div class="alert alert-success" role="alert" th:if="${param.logout}" >Session closed successfully</div>
+    </div>
+    
     <div class="container my-5">
 
         <h1>Log in</h1>
@@ -39,9 +42,13 @@
 
         <input type="submit" name="action" value="Sign in" class="btn btn-primary">
     </form>
-    <span th:if="${param.error}" class="error"><p>Wrong user or password</p></span>
-    <span th:if="${param.logout}"><p>Session closed successfully</p></span>
-    <span th:if="${param.logout}">Session closed successfully</p></span>
+
+    <div class="container my-5">
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">Wrong user or password</div>
+    </div>
+    
+    
+    
 
     </div>
 </body>

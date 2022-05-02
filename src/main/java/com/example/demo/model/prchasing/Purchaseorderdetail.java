@@ -4,15 +4,17 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.example.demo.model.groups.Add;
 
 /**
  * The persistent class for the purchaseorderdetail database table.
@@ -24,14 +26,16 @@ public class Purchaseorderdetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PURCHASEORDERDETAIL_PURCHASEORDERID_GENERATOR",allocationSize = 1, sequenceName="PURCHASEORDERDETAIL_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PURCHASEORDERDETAIL_PURCHASEORDERID_GENERATOR")
+	@SequenceGenerator(name = "PURCHASEORDERDETAIL_PURCHASEORDERID_GENERATOR", allocationSize = 1, sequenceName = "PURCHASEORDERDETAIL_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PURCHASEORDERDETAIL_PURCHASEORDERID_GENERATOR")
 	private Integer id;
 
 	private Timestamp duedate;
 
 	private Timestamp modifieddate;
 
+	@NotNull(groups = Add.class)
+	@Min(value = 1, message = "Order quantity must be greater than zero", groups = Add.class)
 	private Integer orderqty;
 
 	private Integer productid;
@@ -40,11 +44,15 @@ public class Purchaseorderdetail implements Serializable {
 
 	private BigDecimal rejectedqty;
 
+	@NotNull(groups = Add.class)
+	@Min(value = 1, message = "Unit price must be greater than zero", groups = Add.class)
 	private BigDecimal unitprice;
 
 	// bi-directional many-to-one association to Purchaseorderheader
+
+	// @JoinColumn(name = "purchaseorderid", insertable = false, updatable = false)
+	@NotNull(groups = Add.class)
 	@ManyToOne
-	@JoinColumn(name = "purchaseorderid", insertable = false, updatable = false)
 	private Purchaseorderheader purchaseorderheader;
 
 	public Purchaseorderdetail() {

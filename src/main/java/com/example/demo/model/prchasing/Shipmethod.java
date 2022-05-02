@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.example.demo.model.groups.Add;
 
 /**
  * The persistent class for the shipmethod database table.
@@ -29,12 +35,18 @@ public class Shipmethod implements Serializable {
 
 	private Timestamp modifieddate;
 
+	@Size(min = 4, groups = Add.class)
+	@NotBlank
 	private String name;
 
 	private Integer rowguid;
 
+	@NotNull(groups = Add.class)
+	@Min(value = 1, message = "Ship base must be greater than zero", groups = Add.class)
 	private BigDecimal shipbase;
 
+	@NotNull(groups = Add.class)
+	@Min(value = 1, message = "Ship rate must be greater than zero", groups = Add.class)
 	private BigDecimal shiprate;
 
 	// bi-directional many-to-one association to Purchaseorderheader

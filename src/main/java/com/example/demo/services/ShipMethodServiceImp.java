@@ -7,7 +7,9 @@ import com.example.demo.model.prchasing.Shipmethod;
 import com.example.demo.repositories.ShipMethodRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ShipMethodServiceImp implements ShipMethodService {
 
     ShipMethodRepository smr;

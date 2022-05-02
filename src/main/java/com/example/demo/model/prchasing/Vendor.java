@@ -34,6 +34,7 @@ public class Vendor implements Serializable {
 
 	private String activeflag;
 
+	@NotNull(groups = Add.class)
 	@Min(value = 1, message = "The credit rating must be greater than zero", groups = Add.class)
 	private Integer creditrating;
 

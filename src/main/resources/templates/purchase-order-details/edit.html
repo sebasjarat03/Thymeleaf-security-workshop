@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h2>Edit order detail</h2>
+        <div>
+            <form class="container my-5" action="#" th:action="@{/purchase-order-details/edit/{id}(id=${purchaseorderdetail.id})}" th:object="${purchaseorderdetail}" method="post">
+                <div class="form-group col-md-6">
+                    <label for="id" class="col-form-label">Id</label> <input
+                        readonly type="text" name="id" th:field="*{id}" class="form-control" id="id">
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="orderqty">Order quantity</label>
+                    <input class="form-control" type="text" th:field="*{orderqty}" id="orderqty" placeholder="Unit price">
+                    <span th:if="${#fields.hasErrors('orderqty')}" th:errors="*{orderqty}" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="unitprice">Unit price</label>
+                    <input class="form-control" type="text" th:field="*{unitprice}" id="unitprice" placeholder="Unit price">
+                    <span th:if="${#fields.hasErrors('unitprice')}" th:errors="*{unitprice}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="poheader"  class="col-form-label">Purchase order header</label>
+                    <select id="poheader" th:field="*{purchaseorderheader}">
+                        <option th:each="poh : ${purchaseorderheaders}"
+                                th:value="${poh.purchaseorderid}"
+                                th:text="${poh.purchaseorderid}"
+                                th:selected="${purchaseorderdetail.purchaseorderheader==poh}">
+                        </option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('purchaseorderheader')}" th:errors="*{purchaseorderheader}" class="text-danger"></span>
+                </div> 
+               
+                <div class="row">
+                    <div class="col-md-4 mt-3">
+                        <input type="submit" name="action" class="btn btn-primary" value="Confirm changes">
+                    </div>
+                    
+                    <div class="col-md-3 mt-3">
+                        <input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
