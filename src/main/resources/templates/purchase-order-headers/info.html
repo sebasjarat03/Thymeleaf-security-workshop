@@ -18,36 +18,34 @@
 </head>
 <body>
 <div class="container my-5">
-    <h2>Purchase order detail</h2>
+    <h2>Purchase order header</h2>
     <p>
         <a href="/" class="btn btn-primary">Menu</a>
     </p>
     <div>
         <h5>Id</h5>
-        <p th:text="${purchaseorderdetail.id}"></p>
+        <p th:text="${purchaseorderheader.purchaseorderid}"></p>
     </div>
     <div>
-        <h5>Order quantity</h5>
-        <p th:text="${purchaseorderdetail.orderqty}"></p>
+        <h5>Order date</h5>
+        <p th:text="${purchaseorderheader.orderdate}"></p>
     </div>
     <div>
-        <h5>Unit price</h5>
-        <p th:text="${purchaseorderdetail.unitprice}"></p>
+        <h5>Subtotal</h5>
+        <p th:text="${purchaseorderheader.subtotal}"></p>
     </div>
     <div>
-        <h5>Purchase order header</h5>
+        <h5>Employee</h5>
         <p >
-            <a th:href="@{/purchase-order-headers/{id}(id=${purchaseorderdetail.purchaseorderheader.purchaseorderid})}"
-									 th:text="${purchaseorderdetail.purchaseorderheader.purchaseorderid}"
-									>
-									
-								</a>
+            <a th:text="${purchaseorderheader.employeeid}"
+			    th:href="@{/employee/{id}(id=${purchaseorderheader.employeeid})}">
+			</a>
         </p>
     </div>
     
     
     <p>
-        <a th:href="@{/purchase-order-details/edit/{id}(id=${purchaseorderdetail.id})}" class="btn btn-primary">Edit</a>
+        <a th:href="@{/purchase-order-headers/edit/{id}(id=${purchaseorderheader.purchaseorderid})}" class="btn btn-primary">Edit</a>
     </p>
     <form>
         <input type="button" value="Go back!" onclick="history.back()" class="btn btn-primary">

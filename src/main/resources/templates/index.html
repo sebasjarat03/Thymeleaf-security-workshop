@@ -19,12 +19,12 @@
 	<div th:switch="${apps}" class="container my-5">
 		<div class="row">
 			<div class="col-md-6">
-				<h2 th:case="null">Users and Appointments!</h2>
+				<h2 th:case="null">Shopping CRUD!</h2>
 				
 				<p><a href="/vendors/"><i class="fas fa-user-edit ml-2"></i> Go to Vendors</a></p>
 				<p><a href="/ship-methods/"><i class="fas fa-shipping-fast ml-2"></i> Go to Ship methods</a></p>
 				<p><a href="/purchase-order-details/"><i class="fas fa-info-circle ml-2"></i> Go to Puchase order details</a></p>
-				<p><a href="/apps/"><i class="fas fa-shopping-cart ml-2"></i> Go to Purchase order header</a></p>
+				<p><a href="/purchase-order-headers/"><i class="fas fa-shopping-cart ml-2"></i> Go to Purchase order header</a></p>
 				<p><a href="/logout"><i class="fas fa-sign-out-alt ml-2"></i> Logout</a></p>
 			</div>
 		</div>

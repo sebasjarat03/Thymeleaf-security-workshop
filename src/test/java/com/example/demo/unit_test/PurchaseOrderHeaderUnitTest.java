@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -87,7 +88,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf("2020-11-14 00:00:00"));
+        poHeader.setOrderdate(LocalDate.parse("2020-11-14"));
         poHeader.setSubtotal(new BigDecimal(85));
         assertThrows(IllegalArgumentException.class, () -> {
             pohs.save(poHeader, 3, 4);
@@ -101,7 +102,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf("2023-07-05 00:00:00"));
+        poHeader.setOrderdate(LocalDate.parse("2023-07-05"));
         poHeader.setSubtotal(new BigDecimal(85));
         assertThrows(IllegalArgumentException.class, () -> {
             pohs.save(poHeader, 3, 4);
@@ -115,7 +116,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(-5));
         assertThrows(IllegalArgumentException.class, () -> {
             pohs.save(poHeader, 3, 4);
@@ -129,7 +130,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(Optional.empty());
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(85));
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -145,7 +146,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(Optional.empty());
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(85));
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -161,7 +162,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(85));
 
         assertTrue(pohs.save(poHeader, 3, 4));
@@ -188,7 +189,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf("2020-11-14 00:00:00"));
+        poHeader.setOrderdate(LocalDate.parse("2020-11-14"));
         poHeader.setSubtotal(new BigDecimal(85));
         assertThrows(IllegalArgumentException.class, () -> {
             pohs.edit(poHeader, 3, 4);
@@ -202,7 +203,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf("2023-07-05 00:00:00"));
+        poHeader.setOrderdate(LocalDate.parse("2023-07-05"));
         poHeader.setSubtotal(new BigDecimal(85));
         assertThrows(IllegalArgumentException.class, () -> {
             pohs.edit(poHeader, 3, 4);
@@ -216,7 +217,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(-5));
         assertThrows(IllegalArgumentException.class, () -> {
             pohs.edit(poHeader, 3, 4);
@@ -230,7 +231,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(Optional.empty());
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(85));
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -246,7 +247,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(Optional.empty());
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(85));
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -262,7 +263,7 @@ public class PurchaseOrderHeaderUnitTest {
         Mockito.when(pr.findById(3)).thenReturn(this.person);
         Mockito.when(er.findById(4)).thenReturn(this.employee);
         this.poHeader = new Purchaseorderheader();
-        poHeader.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+        poHeader.setOrderdate(LocalDate.now());
         poHeader.setSubtotal(new BigDecimal(85));
         Mockito.when(pohr.findById(poHeader.getPurchaseorderid())).thenReturn(Optional.of(this.poHeader));
 

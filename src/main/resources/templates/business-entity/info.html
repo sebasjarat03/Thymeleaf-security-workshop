@@ -18,37 +18,19 @@
 </head>
 <body>
 <div class="container my-5">
-    <h2>Purchase order detail</h2>
+    <h2>Business entity</h2>
     <p>
         <a href="/" class="btn btn-primary">Menu</a>
     </p>
     <div>
         <h5>Id</h5>
-        <p th:text="${purchaseorderdetail.id}"></p>
-    </div>
-    <div>
-        <h5>Order quantity</h5>
-        <p th:text="${purchaseorderdetail.orderqty}"></p>
-    </div>
-    <div>
-        <h5>Unit price</h5>
-        <p th:text="${purchaseorderdetail.unitprice}"></p>
-    </div>
-    <div>
-        <h5>Purchase order header</h5>
-        <p >
-            <a th:href="@{/purchase-order-headers/{id}(id=${purchaseorderdetail.purchaseorderheader.purchaseorderid})}"
-									 th:text="${purchaseorderdetail.purchaseorderheader.purchaseorderid}"
-									>
-									
-								</a>
-        </p>
+        <p th:text="${businessentity.businessentityid}"></p>
     </div>
     
     
-    <p>
-        <a th:href="@{/purchase-order-details/edit/{id}(id=${purchaseorderdetail.id})}" class="btn btn-primary">Edit</a>
-    </p>
+    
+    
+    
     <form>
         <input type="button" value="Go back!" onclick="history.back()" class="btn btn-primary">
     </form>

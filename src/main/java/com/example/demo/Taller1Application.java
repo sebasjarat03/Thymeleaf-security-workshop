@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.example.demo.model.UserType;
@@ -53,20 +54,22 @@ public class Taller1Application {
 			PurchaseOrderHeaderRepository pohr, PersonRepository personRepository,
 			EmployeeRepository employeeRepository) {
 		return (args) -> {
-			Person p1 = new Person();
-			p1.setFirstname("Alfonso");
-			p1.setLastname("Bustamante");
-			personRepository.save(p1);
-
-			Person p2 = new Person();
-			p2.setFirstname("Luis");
-			p2.setLastname("Arias");
-			personRepository.save(p2);
-
-			Person p3 = new Person();
-			p3.setFirstname("Luisa");
-			p3.setLastname("Ramirez");
-			personRepository.save(p3);
+			/*
+			 * Person p1 = new Person();
+			 * p1.setFirstname("Alfonso");
+			 * p1.setLastname("Bustamante");
+			 * personRepository.save(p1);
+			 * 
+			 * Person p2 = new Person();
+			 * p2.setFirstname("Luis");
+			 * p2.setLastname("Arias");
+			 * personRepository.save(p2);
+			 * 
+			 * Person p3 = new Person();
+			 * p3.setFirstname("Luisa");
+			 * p3.setLastname("Ramirez");
+			 * personRepository.save(p3);
+			 */
 
 			Employee e1 = new Employee();
 			e1.setGender("masculino");
@@ -81,15 +84,14 @@ public class Taller1Application {
 			employeeRepository.save(e3);
 
 			Purchaseorderheader poh1 = new Purchaseorderheader();
-			poh1.setOrderdate(Timestamp.valueOf(LocalDateTime.now()));
+			poh1.setOrderdate(LocalDate.now());
 			poh1.setSubtotal(new BigDecimal(15));
-			pohs.save(poh1, p1.getBusinessentityid(), e1.getBusinessentityid());
+			pohs.save(poh1, 0, e1.getBusinessentityid());
 
 			Purchaseorderdetail pod1 = new Purchaseorderdetail();
 			pod1.setOrderqty(10);
 			pod1.setUnitprice(new BigDecimal(3));
 			pods.save(pod1, poh1.getPurchaseorderid());
-			System.out.println("HOLA:  " + pod1.getPurchaseorderheader().getPurchaseorderid());
 
 			Shipmethod sm1 = new Shipmethod();
 			sm1.setName("Ship method 1");
@@ -101,6 +103,7 @@ public class Taller1Application {
 			v1.setName("Sebastian");
 			v1.setCreditrating(12);
 			v1.setPurchasingwebserviceurl("https:/amazon.com");
+			v1.setAccountnumber("123");
 			vendorService.save(v1);
 
 			Userr u1 = new Userr();
@@ -111,9 +114,9 @@ public class Taller1Application {
 			userRepository.save(u1);
 
 			Userr u2 = new Userr();
-			u2.setUsername("operador");
+			u2.setUsername("oper");
 			u2.setId(2);
-			u2.setPassword("{noop}operador");
+			u2.setPassword("{noop}oper");
 			u2.setUserType(UserType.OPERADOR);
 			userRepository.save(u2);
 

@@ -29,21 +29,20 @@
 								<th>Account Number</th>
 								<th>Credit rating</th>
 								<th>Name</th>
-								<th>Preferred vendor status</th>
 								<th>Purchasing web service url</th>
-								<th>Purchase order header</th>
 								
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="vendor : ${vendors}">
-								<td class="text-info" th:text="${vendor.businessentityid}"></td>
-								<td class="text-info" th:text="${vendor.accountnumber}"></td>
-								<td class="text-info" th:text="${vendor.creditrating}"></td>
-								<td class="text-info" th:text="${vendor.name}"></td>
-								<td class="text-info" th:text="${vendor.preferredvendorstatus}"></td>
-								<td class="text-info" th:text="${vendor.purchasingwebserviceurl}"></td>
-								<td class="text-info" th:text="${vendor.purchaseorderheaders}"></td>
+								<td> <a  th:text="${vendor.businessentityid}"
+									th:href="@{/business-entity/{id}(id=${vendor.businessentityid})}">
+
+								</a></td>
+								<td  th:text="${vendor.accountnumber}"></td>
+								<td  th:text="${vendor.creditrating}"></td>
+								<td  th:text="${vendor.name}"></td>
+								<td  th:text="${vendor.purchasingwebserviceurl}"></td>
 								
 								<td><a th:href="@{/vendors/edit/{id}(id=${vendor.businessentityid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>

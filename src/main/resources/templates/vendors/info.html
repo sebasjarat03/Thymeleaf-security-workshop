@@ -24,7 +24,9 @@
     </p>
     <div>
         <h5>Business entity id</h5>
-        <p th:text="${vendor.businessentityid}"></p>
+       <p><a  th:text="${vendor.businessentityid}"
+        th:href="@{/business-entity/{id}(id=${vendor.businessentityid})}">
+</a></p> 
     </div>
     <div>
         <h5>Account number</h5>

@@ -32,7 +32,7 @@ public class PurchaseOrderHeaderServiceImp implements PurchaseOrderHeaderService
     @Override
     public boolean save(Purchaseorderheader poh, Integer personId, Integer employeeId) {
         boolean created = false;
-        Optional<Person> person = pr.findById(personId);
+        // Optional<Person> person = pr.findById(personId);
         Optional<Employee> employee = er.findById(employeeId);
         if (poh == null) {
             throw new IllegalArgumentException("purchase order header is null");
@@ -41,9 +41,11 @@ public class PurchaseOrderHeaderServiceImp implements PurchaseOrderHeaderService
             throw new IllegalArgumentException("the order date must be the actual date");
         } else if (poh.getSubtotal().compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("The subtotal must be greater than zero");
-        } else if (person.isEmpty()) {
-            throw new IllegalArgumentException("the person does not exist");
-        } else if (employee.isEmpty()) {
+        } /*
+           * else if (person.isEmpty()) {
+           * throw new IllegalArgumentException("the person does not exist");
+           * }
+           */ else if (employee.isEmpty()) {
             throw new IllegalArgumentException("the employee does not exist");
         } else {
             poh.setEmployeeid(employeeId);
@@ -57,7 +59,7 @@ public class PurchaseOrderHeaderServiceImp implements PurchaseOrderHeaderService
     @Override
     public boolean edit(Purchaseorderheader poh, Integer personId, Integer employeeId) {
         boolean edited = false;
-        Optional<Person> person = pr.findById(personId);
+        // Optional<Person> person = pr.findById(personId);
         Optional<Employee> employee = er.findById(employeeId);
         if (poh == null) {
             throw new IllegalArgumentException("purchase order header is null");
@@ -68,9 +70,11 @@ public class PurchaseOrderHeaderServiceImp implements PurchaseOrderHeaderService
                 throw new IllegalArgumentException("the order date must be the actual date");
             } else if (poh.getSubtotal().compareTo(BigDecimal.ZERO) < 0) {
                 throw new IllegalArgumentException("The subtotal must be greater than zero");
-            } else if (person.isEmpty()) {
-                throw new IllegalArgumentException("the person does not exist");
-            } else if (employee.isEmpty()) {
+            } /*
+               * else if (person.isEmpty()) {
+               * throw new IllegalArgumentException("the person does not exist");
+               * }
+               */else if (employee.isEmpty()) {
                 throw new IllegalArgumentException("the employee does not exist");
             } else {
                 Purchaseorderheader nh = phead.get();

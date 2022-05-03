@@ -1,33 +1,55 @@
 package com.example.demo.model.prchasing;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import com.example.demo.model.groups.Add;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * The persistent class for the purchaseorderheader database table.
  * 
  */
 @Entity
-@NamedQuery(name="Purchaseorderheader.findAll", query="SELECT p FROM Purchaseorderheader p")
+@NamedQuery(name = "Purchaseorderheader.findAll", query = "SELECT p FROM Purchaseorderheader p")
 public class Purchaseorderheader implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PURCHASEORDERHEADER_PURCHASEORDERID_GENERATOR",allocationSize = 1, sequenceName="PURCHASEORDERHEADER_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PURCHASEORDERHEADER_PURCHASEORDERID_GENERATOR")
+	@SequenceGenerator(name = "PURCHASEORDERHEADER_PURCHASEORDERID_GENERATOR", allocationSize = 1, sequenceName = "PURCHASEORDERHEADER_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PURCHASEORDERHEADER_PURCHASEORDERID_GENERATOR")
 	private Integer purchaseorderid;
 
+	@NotNull(groups = Add.class)
 	private Integer employeeid;
 
 	private BigDecimal freight;
 
 	private Timestamp modifieddate;
 
-	private Timestamp orderdate;
+	@PastOrPresent(groups = Add.class, message = "Order date must be the actual date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@FutureOrPresent(groups = Add.class, message = "Order date must be the actual date")
+	@NotNull(groups = Add.class)
+	private LocalDate orderdate;
 
 	private Integer revisionnumber;
 
@@ -35,22 +57,24 @@ public class Purchaseorderheader implements Serializable {
 
 	private Integer status;
 
+	@Min(value = 1, message = "The subtotal must be greater than zero", groups = Add.class)
+	@NotNull(groups = Add.class)
 	private BigDecimal subtotal;
 
 	private BigDecimal taxamt;
 
-	//bi-directional many-to-one association to Purchaseorderdetail
-	@OneToMany(mappedBy="purchaseorderheader")
+	// bi-directional many-to-one association to Purchaseorderdetail
+	@OneToMany(mappedBy = "purchaseorderheader")
 	private List<Purchaseorderdetail> purchaseorderdetails;
 
-	//bi-directional many-to-one association to Shipmethod
+	// bi-directional many-to-one association to Shipmethod
 	@ManyToOne
-	@JoinColumn(name="shipmethodid")
+	@JoinColumn(name = "shipmethodid")
 	private Shipmethod shipmethod;
 
-	//bi-directional many-to-one association to Vendor
+	// bi-directional many-to-one association to Vendor
 	@ManyToOne
-	@JoinColumn(name="vendorid")
+	@JoinColumn(name = "vendorid")
 	private Vendor vendor;
 
 	public Purchaseorderheader() {
@@ -88,11 +112,11 @@ public class Purchaseorderheader implements Serializable {
 		this.modifieddate = modifieddate;
 	}
 
-	public Timestamp getOrderdate() {
+	public LocalDate getOrderdate() {
 		return this.orderdate;
 	}
 
-	public void setOrderdate(Timestamp orderdate) {
+	public void setOrderdate(LocalDate orderdate) {
 		this.orderdate = orderdate;
 	}
 
